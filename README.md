@@ -16,6 +16,12 @@ As I edit the notebook, the plugin spawns processes and they complete—because 
 
 ![screen capture](sleeper-demo.gif)
 
+N.B. If this plugin, instead of shelling out to an external process, simply sleeps itself for three seconds (`CALL_EXTERNAL = False` in the [plugin]((./pyls_sleeper/plugin.py))), this problem goes away: the plugin starts, takes three seconds to complete, and returns.
+
+This suggests that the threading infrastructure used by pyls(p) is spawning the process via `subprocess` but is pausing the thread until it's "poked" by interacting with the notebook—on Windows at least. On Linux and macOS, the spawned process seems to run fine independently.
+
+N.B. This issue happens on the original [python-language-server](https://github.com/palantir/python-language-server) as well as its new community-developed fork [python-lsp-server](https://github.com/python-lsp/python-lsp-server).
+
 ## Steps to reproduce
 I create a fresh conda environment in Windows and install pyls-memestra and other requirements:
 ```
