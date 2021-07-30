@@ -1,0 +1,3 @@
+include requirements.txt
+include LICENSE
+include pyls_sleeper/ext/sleeper.py
