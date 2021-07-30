@@ -6,7 +6,7 @@ We run into a strange issue on Windows (not on Linux or macOS) where, external p
 This causes *other* Jupyterlab-lsp plugins to not update, until 
 
 ## Reproduction
-To reproduce this issue, this repo contains a very simple Jupyterlab-lsp plugin that spawns a shell call to `python` to run a simple Python script that sleeps for three seconds. The plugin prints the PID of the spawned process when it starts, and when it ends.
+To reproduce this issue, this repo contains a very simple Jupyterlab-lsp plugin that spawns a shell call to `python` to run a simple Python script that [sleeps for three seconds](./pyls_sleeper/ext/sleeper.py). The plugin prints the PID of the spawned process when it starts, and when it ends.
 
 In Linux/macOS, which work correctly, each spawned PID ends three seconds after it begins.
 
