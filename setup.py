@@ -12,6 +12,6 @@ setup(
     long_description_content_type="text/markdown",
     packages=['pyls_sleeper'],
     install_requires=open("requirements.txt").read().splitlines(),
-    entry_points={"pyls": ["pyls_sleeper = pyls_sleeper.plugin"]},
+    entry_points={"pylsp": ["pyls_sleeper = pyls_sleeper.plugin"]},
     include_package_data=True,
 )

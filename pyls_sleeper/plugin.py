@@ -1,6 +1,6 @@
 import subprocess
 from os import path, environ
-from pyls import hookimpl
+from pylsp import hookimpl
 import logging
 
 logger = logging.getLogger(__name__)
@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 CALL_EXTERNAL = True # if True, use `subprocess` to shell out to a script and displaying the hang
 
 @hookimpl
-def pyls_lint(config, document):
+def pylsp_lint(config, document):
     if not CALL_EXTERNAL:
         logger.warning(f"SLEEPER started")
         import time
