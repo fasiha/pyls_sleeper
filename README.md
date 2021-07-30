@@ -17,12 +17,24 @@ As I edit the notebook, the plugin spawns processes and they complete—because 
 ![screen capture](sleeper-demo.gif)
 
 ## Steps to reproduce
-I create a fresh conda environment in Windows (the `code` step below is needed to fix a Unicode/Windows bug in [pyls-memestra#50](https://github.com/QuantStack/pyls-memestra/issues/50)):
+I create a fresh conda environment in Windows and install pyls-memestra and other requirements:
 ```
 conda create -n pylaguageserver-sleeper
 conda activate pylaguageserver-sleeper
 conda install -c conda-forge pyls-memestra jupyterlab-lsp nodejs
+```
+
+I edit a file to remove an emoji, to fix a Unicode/Windows bug in [pyls-memestra#50](https://github.com/QuantStack/pyls-memestra/issues/50):
+```
 code C:\Users\traveler\miniconda3\envs\pylaguageserver-sleeper\lib\site-packages\pyls_memestra\plugin.py
+```
+
+I pip-install this repo:
+```
+pip install c:\path\to\pyls_sleeper
+```
+and start the Jupyter server:
+```
 jupyter lab --no-browser
 ```
 
