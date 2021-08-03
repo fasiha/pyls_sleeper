@@ -3,7 +3,7 @@ We are writing a Jupyterlab-lsp plugin, similar in form to [pyls-memestra](https
 
 We run into a strange issue on Windows (not on Linux or macOS) where, external processes spawned by the Jupyterlab-lsp plugin *hang* without executing, until the user interacts with the notebook, e.g., clicking on a different cell or editing or saving the notebook.
 
-This causes *other* Jupyterlab-lsp plugins to not update, until 
+This causes *other* Jupyterlab-lsp plugins to not update, until the hanging plugin eventually completes.
 
 ## Reproduction
 To reproduce this issue, this repo contains a very simple Jupyterlab-lsp plugin that [spawns a shell call](./pyls_sleeper/plugin.py) to `python` to run a simple Python script `sleeper.py` that [sleeps for three seconds](./pyls_sleeper/ext/sleeper.py). The plugin prints the PID of the spawned process when it starts, and when it ends.
