@@ -53,6 +53,20 @@ def foo():
 foo()
 ```
 
+## Windows Python Popen semi-workarounds
+If we invoke `Popen` with the following keywords:
+```py
+proc = subprocess.Popen(["python", sleeper_file], stdout=None, stderr=None, creationflags=subprocess.DETACHED_PROCESS)
+```
+this does not hang in Windows. Per the [`Popen` docs](https://docs.python.org/3/library/subprocess.html#subprocess.Popen), `stdout=stderr=None` means:
+> With the default settings of None, no redirection will occur; the child’s file handles will be inherited from the parent
+
+We *also* need to detach the process for this to avoid hanging. With both these requirements, this pyls plugin completes after three seconds, allowing the frontend to display all pyls plugins' analysis.
+
+The downside to this is, of course, we cannot consume the spawned subprocess' `stdout`. This is the issue documented in this [Stack Overflow](https://stackoverflow.com/questions/16523877/subprocess-communicate-hangs-on-windows-8-if-parent-process-creates-some-child#comment23794470_16542268) comment, and also in this [Python bug report](https://bugs.python.org/issue1227748) which argues that the Popen docstring is semantically incorrect for Windows, and that default behavior in Windows is *different* than on Unix.
+
+We *could* work around not having stdout by passing a temporary file into the shelled subprocess as a command-line argument and having it write to that file instead of printing to stdout. However, a more generic solution would be nice.
+
 ## Process debugger information
 Opening the spawned process' PID in Windows [Process Explorer](https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer) shows that it's stuck at the same function (`ntdll.dll!ZwQueryInformationFile`), with the following stack:
 ```
