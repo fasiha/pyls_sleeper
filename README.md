@@ -65,6 +65,8 @@ We *also* need to detach the process for this to avoid hanging. With both these 
 
 The downside to this is, of course, we cannot consume the spawned subprocess' `stdout`. This is the issue documented in this [Stack Overflow](https://stackoverflow.com/questions/16523877/subprocess-communicate-hangs-on-windows-8-if-parent-process-creates-some-child#comment23794470_16542268) comment, and also in this [Python bug report](https://bugs.python.org/issue1227748) which argues that the Popen docstring is semantically incorrect for Windows, and that default behavior in Windows is *different* than on Unix.
 
+However, it remains unclear to me how to get Unix-like behavior (i.e., no hanging) on Windows with this set of keywords to `Popen`.
+
 We *could* work around not having stdout by passing a temporary file into the shelled subprocess as a command-line argument and having it write to that file instead of printing to stdout. However, a more generic solution would be nice.
 
 ## Process debugger information
