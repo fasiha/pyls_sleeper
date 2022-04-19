@@ -30,12 +30,7 @@ conda activate pylaguageserver-sleeper
 conda install -c conda-forge pyls-memestra jupyterlab-lsp nodejs
 ```
 
-I edit a file to remove an emoji, to fix a Unicode/Windows bug in [pyls-memestra#50](https://github.com/QuantStack/pyls-memestra/issues/50):
-```
-code C:\Users\traveler\miniconda3\envs\pylaguageserver-sleeper\lib\site-packages\pyls_memestra\plugin.py
-```
-
-I pip-install this repo:
+Then I pip-install this repo:
 ```
 pip install c:\path\to\pyls_sleeper
 ```
